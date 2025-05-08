@@ -1,12 +1,12 @@
-const TaskIcon = () => (
+const InboxIcon = () => (
   <svg
-    width="68"
-    height="68"
+    width="60"
+    height="60"
     viewBox="0 0 68 68"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g filter="url(#filter0_d_2_175)">
+    <g filter="url(#filter0_d_2_188)">
       <path
         d="M64 30C64 46.5685 50.5685 60 34 60C17.4315 60 4 46.5685 4 30C4 13.4315 17.4315 0 34 0C50.5685 0 64 13.4315 64 30Z"
         fill="#F2F2F2"
@@ -15,12 +15,12 @@ const TaskIcon = () => (
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
-      d="M25.1111 21.6667H45.1111C46.3334 21.6667 47.3334 22.6667 47.3334 23.889V38.3334C47.3334 39.5556 46.3334 40.5556 45.1111 40.5556H25.1111C23.8889 40.5556 22.8889 39.5556 22.8889 38.3334V23.889C22.8889 22.6667 23.8889 21.6667 25.1111 21.6667ZM25.1111 23.889V38.3334H34V23.889H25.1111ZM45.1111 38.3334H36.2222V23.889H45.1111V38.3334ZM44 27.7779H37.3334V29.4445H44V27.7779ZM37.3334 30.5556H44V32.2223H37.3334V30.5556ZM44 33.3334H37.3334V35.0001H44V33.3334Z"
-      fill="#F8B76B"
+      d="M38.4443 21.1107H23.9999C23.3888 21.1107 22.8888 21.6107 22.8888 22.2218V37.7774L27.3332 33.3329H38.4443C39.0555 33.3329 39.5555 32.8329 39.5555 32.2218V22.2218C39.5555 21.6107 39.0555 21.1107 38.4443 21.1107ZM37.3332 23.3329V31.1106H26.411L25.7555 31.7662L25.111 32.4106V23.3329H37.3332ZM41.7777 25.5552H43.9999C44.611 25.5552 45.111 26.0552 45.111 26.6663V43.333L40.6666 38.8885H28.4443C27.8332 38.8885 27.3332 38.3885 27.3332 37.7774V35.5552H41.7777V25.5552Z"
+      fill="#8885FF"
     />
     <defs>
       <filter
-        id="filter0_d_2_175"
+        id="filter0_d_2_188"
         x="0"
         y="0"
         width="68"
@@ -44,12 +44,12 @@ const TaskIcon = () => (
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_2_175"
+          result="effect1_dropShadow_2_188"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_2_175"
+          in2="effect1_dropShadow_2_188"
           result="shape"
         />
       </filter>
@@ -57,4 +57,4 @@ const TaskIcon = () => (
   </svg>
 );
 
-export default TaskIcon;
+export default InboxIcon;

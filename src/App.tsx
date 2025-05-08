@@ -1,59 +1,59 @@
 import './App.css';
 import { useState } from 'react';
-import MenuIcon from './component/MenuIcon';
-import SearchIcon from './component/SearchIcon';
-import InboxIcon from './component/InboxIcon';
-import TaskIcon from './component/TaskIcon';
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+import Menu from './components/Menu';
+import Inbox from './components/Inbox';
+import Task from './components/Task';
 
 const App: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [inboxOpen, setInboxOpen] = useState<boolean>(false);
+  const [taskOpen, setTaskOpen] = useState<boolean>(false);
 
   const toggleMenu = (): void => {
+    if (inboxOpen || taskOpen) {
+      setInboxOpen(false);
+      setTaskOpen(false);
+    }
     setMenuOpen(prev => !prev);
+  };
+
+  const toggleInbox = (): void => {
+    if (taskOpen) {
+      setTaskOpen(false);
+    }
+    setInboxOpen(prev => !prev);
+  };
+
+  const toggleTask = (): void => {
+    if (inboxOpen) {
+      setInboxOpen(false);
+    }
+    setTaskOpen(prev => !prev);
   };
 
   return (
     <div className="flex min-h-screen w-screen bg-[#2c2c2c] text-white overflow-hidden">
-      <aside className="w-[200px] bg-[#2f2f2f] border-r border-gray-600"></aside>
+      <Sidebar />
 
       <main className="flex-1 flex flex-col">
-        <div className="h-12 bg-[#4a4a4a] flex items-center gap-2 px-4 border-b border-gray-600">
-          <SearchIcon />
-          <input
-            type="text"
-            placeholder="Search"
-            className="flex-1 bg-transparent outline-none text-white placeholder-gray-400 focus:ring-0 focus:outline-none"
-          />
-        </div>
+        <Header />
 
         <div className="flex-1 p-4"></div>
       </main>
 
-      <div className="fixed bottom-4 right-4">
-        {menuOpen ? (
-          <div className="grid grid-cols-3 gap-2">
-            <div className="flex flex-col items-center justify-between space-y-1 h-full">
-              <p className="text-xs">Task</p>
-              <TaskIcon />
-            </div>
-            <div className="flex flex-col items-center justify-between space-y-1 h-full">
-              <p className="text-xs">Inbox</p>
-              <InboxIcon />
-            </div>
-            <div
-              className="flex flex-col items-center justify-between space-y-1 h-full"
-              onClick={toggleMenu}
-            >
-              <p></p>
-              <MenuIcon />
-            </div>
-          </div>
-        ) : (
-          <div onClick={toggleMenu}>
-            <MenuIcon />
-          </div>
-        )}
-      </div>
+      <Menu
+        menuOpen={menuOpen}
+        inboxOpen={inboxOpen}
+        taskOpen={taskOpen}
+        toggleMenu={toggleMenu}
+        toggleInbox={toggleInbox}
+        toggleTask={toggleTask}
+      />
+
+      <Inbox inboxOpen={inboxOpen} />
+      <Task taskOpen={taskOpen} />
     </div>
   );
 };
