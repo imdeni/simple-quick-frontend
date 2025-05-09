@@ -9,6 +9,9 @@ interface Props {
 
 const Inbox: React.FC<Props> = ({ inboxOpen }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedChatIndex, setSelectedChatIndex] = useState<number | null>(
+    null
+  );
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -17,7 +20,7 @@ const Inbox: React.FC<Props> = ({ inboxOpen }) => {
       setIsLoading(true);
       timer = setTimeout(() => {
         setIsLoading(false);
-      }, 3000);
+      }, 2000);
     } else {
       setIsLoading(false);
     }
@@ -26,18 +29,27 @@ const Inbox: React.FC<Props> = ({ inboxOpen }) => {
   }, [inboxOpen]);
 
   return (
-    <div
-      className={`fixed bottom-28 right-4 bg-white rounded-md shadow-lg w-full max-w-[400px] lg:max-w-[600px] h-96 lg:h-128 landscape:h-64 lg:landscape:h-128 text-black transition-transform duration-300 ${
-        inboxOpen ? 'translate-x-0' : 'translate-x-[150%]'
-      }`}
-    >
-      <div className="py-[24px] px-[32px] h-full flex flex-col">
-        <Search />
-        <div className="flex-1 overflow-y-auto flex flex-col space-y-4">
-          {isLoading ? <Loadingchats /> : <ChatList />}
+    <>
+      <div
+        className={`fixed bottom-28 right-4 bg-white rounded-md shadow-lg w-full max-w-[400px] lg:max-w-[600px] h-96 lg:h-128 landscape:h-64 lg:landscape:h-128 text-black transition-transform duration-300 ${
+          inboxOpen ? 'translate-x-0' : 'translate-x-[150%]'
+        }`}
+      >
+        <div className="py-[24px] px-[32px] h-full flex flex-col">
+          {selectedChatIndex === null && <Search />}
+          <div className="flex-1 overflow-y-auto flex flex-col space-y-4">
+            {isLoading ? (
+              <Loadingchats />
+            ) : (
+              <ChatList
+                selectedChatIndex={selectedChatIndex}
+                setSelectedChatIndex={setSelectedChatIndex}
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
