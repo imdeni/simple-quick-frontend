@@ -18,6 +18,8 @@ const ChatList: React.FC<ChatListProps> = ({
 }) => {
   const [chats, setChats] = useState<ChatItem[]>([]);
   const [newMessage, setNewMessage] = useState('');
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [originalText, setOriginalText] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -157,9 +159,36 @@ const ChatList: React.FC<ChatListProps> = ({
 
     setChats(prevChats => {
       const updated = [...prevChats];
-      updated[selectedChatIndex].thread.push(newThreadMessage);
+      if (editIndex !== null) {
+        updated[selectedChatIndex].thread[editIndex].message = newMessage;
+      } else {
+        updated[selectedChatIndex].thread.push(newThreadMessage);
+      }
       return updated;
     });
+    setNewMessage('');
+    setEditIndex(null);
+  };
+
+  const beginEdit = (i: number, text: string) => {
+    setEditIndex(i);
+    setOriginalText(text);
+    setNewMessage(text);
+  };
+
+  const cancelEdit = () => {
+    setEditIndex(null);
+    setNewMessage('');
+  };
+
+  const deleteMessage = (index: number) => {
+    if (selectedChatIndex === null) return;
+    setChats(prev => {
+      const updated = [...prev];
+      updated[selectedChatIndex].thread.splice(index, 1);
+      return updated;
+    });
+    setEditIndex(null);
     setNewMessage('');
   };
 
@@ -168,7 +197,7 @@ const ChatList: React.FC<ChatListProps> = ({
 
   return (
     <>
-      {console.log(chats)}
+      {/* {console.log(chats)} */}
       {selectedChat ? (
         <div className="flex flex-col h-full">
           <ChatHeader
@@ -181,12 +210,16 @@ const ChatList: React.FC<ChatListProps> = ({
           <ChatThread
             thread={selectedChat.thread}
             isPrivate={selectedChat.isPrivate}
+            onBeginEdit={beginEdit}
+            handleDelete={deleteMessage}
           />
 
           <ChatInput
             newMessage={newMessage}
             setNewMessage={setNewMessage}
             handleSendMessage={handleSendMessage}
+            isEditing={editIndex !== null}
+            cancelEdit={cancelEdit}
           />
         </div>
       ) : (
