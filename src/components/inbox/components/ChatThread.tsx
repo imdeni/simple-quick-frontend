@@ -19,6 +19,17 @@ const MessageThread: React.FC<MessageThreadProps> = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [newMessagesIndex, setNewMessagesIndex] = useState<number | null>(null);
   const previousThreadRef = useRef<ThreadMessage[]>([]);
+  const [showPrivateMessage, setShowPrivateMessage] = useState(isPrivate);
+
+  useEffect(() => {
+    if (isPrivate) {
+      const timer = setTimeout(() => {
+        setShowPrivateMessage(false);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isPrivate]);
 
   const toggleMenu = (index: number) => {
     setActiveMenuIndex(prev => (prev === index ? null : index));
@@ -108,7 +119,7 @@ const MessageThread: React.FC<MessageThreadProps> = ({
 
             <div
               key={i}
-              className={`flex flex-col p-2 ${i === msg.message.length - 1 && isPrivate ? 'mb-14' : ''} ${isMe ? 'items-start' : 'items-end'}`}
+              className={`flex flex-col p-2 ${isMe ? 'items-start' : 'items-end'}`}
             >
               {!isPrivate && (
                 <div
@@ -157,7 +168,7 @@ const MessageThread: React.FC<MessageThreadProps> = ({
       })}
       <div ref={messagesEndRef} />
 
-      {isPrivate && (
+      {showPrivateMessage && (
         <div className="absolute bottom-22 left-1/2 w-full transform -translate-x-1/2 z-10 px-8">
           <div className="bg-blue-100 px-4 py-2 rounded flex items-center space-x-2 shadow-md">
             <div className="w-4 h-4 border-2 border-blue-700 border-t-transparent rounded-full animate-spin"></div>
