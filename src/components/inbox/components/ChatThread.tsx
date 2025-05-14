@@ -161,7 +161,7 @@ const MessageThread: React.FC<MessageThreadProps> = ({
         <div className="absolute bottom-22 left-1/2 w-full transform -translate-x-1/2 z-10 px-8">
           <div className="bg-blue-100 px-4 py-2 rounded flex items-center space-x-2 shadow-md">
             <div className="w-4 h-4 border-2 border-blue-700 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-sm font-medium text-blue-800">
+            <p className="text-xs sm:text-sm font-medium text-blue-800">
               Please wait while we connect you with one of our team...
             </p>
           </div>
