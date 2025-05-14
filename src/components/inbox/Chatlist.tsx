@@ -19,7 +19,9 @@ const ChatList: React.FC<ChatListProps> = ({
   const [chats, setChats] = useState<ChatItem[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [originalText, setOriginalText] = useState<string>('');
+  // const [originalText, setOriginalText] = useState<string>('');
+
+  const [_, setOriginalText] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {

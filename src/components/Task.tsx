@@ -95,7 +95,8 @@ const Task: React.FC<Props> = ({ taskOpen }) => {
   const incompleteTasks = tasks.filter(task => !task.completed);
   const completedTasks = tasks.filter(task => task.completed);
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  // const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectChange = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);

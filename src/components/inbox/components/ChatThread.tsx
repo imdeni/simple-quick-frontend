@@ -108,7 +108,7 @@ const MessageThread: React.FC<MessageThreadProps> = ({
 
             <div
               key={i}
-              className={`flex flex-col p-2 ${isMe ? 'items-start' : 'items-end'}`}
+              className={`flex flex-col p-2 ${i === msg.message.length - 1 && isPrivate ? 'mb-14' : ''} ${isMe ? 'items-start' : 'items-end'}`}
             >
               {!isPrivate && (
                 <div
